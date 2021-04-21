@@ -3,7 +3,8 @@ import React, {Component} from "react";
 class Counter extends Component {
     state = {
         count : 1,
-        tags : ['tag1', 'tag2', 'tag3']
+        tags: ['tag1', 'tag2', 'tag3'],
+        emptyTags: []
     };
     styles = {
         fontWeight : 'bold',
@@ -25,8 +26,16 @@ class Counter extends Component {
                         {this.state.tags.map(tag => <li key={tag}> {tag} </li>)}
                     </ul>
                 </div>
+                <div>
+                    {this.renderTags()}
+                </div>
             </div>
         );
+    }
+
+    formatCount() {
+        const {count} = this.state;
+        return count === 0 ? "Zero" : count;
     }
 
     getBadgeColor() {
@@ -35,9 +44,13 @@ class Counter extends Component {
         return classes;
     }
 
-    formatCount() {
-        const {count} = this.state;
-        return count === 0 ? "Zero" : count;
+    renderTags() {
+        if (this.state.emptyTags.length === 0) return <p>There is no tags</p>;
+        return(
+            <ul>
+                {this.state.tags.map(tag => <li key={tag}> {tag} </li>)}
+            </ul>
+        );
     }
 }
 
