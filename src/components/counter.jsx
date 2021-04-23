@@ -10,6 +10,20 @@ class Counter extends Component {
         fontWeight : 'bold',
         fontSize : 14
     }
+    /**
+     * this is not defined on handleIncrement function
+     * that's why we need to bind this on the constructor
+     * or we can use arrow function instead*/
+    // constructor(props) {
+    //    super(props);
+    //    this.handleIncrement = this.handleIncrement.bind(this);
+    // }
+
+    handleIncrement = () => {
+        console.log('handleIncrement', this);
+        // this.state.count++; this not work, because react not aware of this change so we have to use setState
+        this.setState({count: this.state.count + 1});
+    }
 
 
     render() {
@@ -29,6 +43,9 @@ class Counter extends Component {
                 <div>
                     {this.renderTags()}
                 </div>
+
+                <span style={this.styles} className={this.getBadgeColor()}>{this.formatCount()}</span>
+                <button onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
             </div>
         );
     }
