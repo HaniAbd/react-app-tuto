@@ -11,9 +11,24 @@ class Counter extends Component {
             </div>
         );
     }
+    componentDidMount() {
+        // this is called after component is rendered
+        // it's the best place to make Ajax call to fetch data
+        // then use this.setState methode
+    }
 
-    handleDelete() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // this is called after component is updated with new states or new props
+        // with this method we can compare new state/props with old state/props
+        // if there is change we can make Ajax call to fetch data from server
+        // Example :
+        // if (prevProps.counter.value !== this.props.counter.value) {
+        // do something ..
+        // }
+    }
 
+    componentWillUnmount() {
+        // this is called just before when component is removed from DOM
     }
 
     formatCount() {
